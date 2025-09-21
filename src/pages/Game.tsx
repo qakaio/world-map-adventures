@@ -7,19 +7,14 @@ import { GameMessages } from '@/components/GameMessages';
 
 export const Game = () => {
   const { gameState, setCurrentLevel } = useGameState();
-  const [view, setView] = useState<'start' | 'map' | 'level'>('start');
+  const [view, setView] = useState<'start' | 'map' | 'level'>(() => {
+    // Auto-start if game was already started
+    return gameState.gameStarted ? 'map' : 'start';
+  });
 
-  useEffect(() => {
-    // Auto-redirect to map if game was already started
-    if (gameState.gameStarted && view === 'start') {
-      setView('map');
-    }
-
-    // Listen for start game event
-    const handleStartGame = () => setView('map');
-    window.addEventListener('start-game', handleStartGame);
-    return () => window.removeEventListener('start-game', handleStartGame);
-  }, [gameState.gameStarted, view]);
+  const handleStartGame = () => {
+    setView('map');
+  };
 
   const handleLevelSelect = (levelId: number) => {
     setCurrentLevel(levelId);
@@ -31,18 +26,15 @@ export const Game = () => {
     setView('map');
   };
 
-  // Auto-start if game was already started
-  if (!gameState.gameStarted && view !== 'start') {
-    setView('start');
-  }
-
   return (
     <div className="min-h-screen bg-game-bg">
       <GameMessages />
       
-      {view === 'start' && <StartScreen />}
+      {view === 'start' && (
+        <StartScreen onStartGame={handleStartGame} />
+      )}
       
-      {view === 'map' && gameState.gameStarted && (
+      {view === 'map' && (
         <GameMap onLevelSelect={handleLevelSelect} />
       )}
       

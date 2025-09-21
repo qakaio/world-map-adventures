@@ -5,62 +5,62 @@ export const gameItems: Record<string, GameItem> = {
   // Basic items
   'key-rusty': {
     id: 'key-rusty',
-    name: 'Chave Enferrujada',
-    description: 'Uma chave antiga e enferrujada. Parece abrir algo importante.',
+    name: 'Rusty Key',
+    description: 'An old and rusty key. Looks like it opens something important.',
     sprite: '🗝️'
   },
   'gem-blue': {
     id: 'gem-blue',
-    name: 'Gema Azul',
-    description: 'Uma gema azul brilhante que pulsa com energia mágica.',
+    name: 'Blue Gem',
+    description: 'A brilliant blue gem that pulses with magical energy.',
     sprite: '💎'
   },
   'scroll-ancient': {
     id: 'scroll-ancient',
-    name: 'Pergaminho Antigo',
-    description: 'Um pergaminho com runas misteriosas.',
+    name: 'Ancient Scroll',
+    description: 'A scroll with mysterious runes.',
     sprite: '📜'
   },
   'potion-healing': {
     id: 'potion-healing',
-    name: 'Poção de Cura',
-    description: 'Uma poção que restaura energia vital.',
+    name: 'Healing Potion',
+    description: 'A potion that restores vital energy.',
     sprite: '🧪'
   },
   'crystal-power': {
     id: 'crystal-power',
-    name: 'Cristal de Poder',
-    description: 'Um cristal que emana poder mágico.',
+    name: 'Power Crystal',
+    description: 'A crystal that emanates magical power.',
     sprite: '🔮'
   },
   'map-treasure': {
     id: 'map-treasure',
-    name: 'Mapa do Tesouro',
-    description: 'Um mapa que mostra a localização de um tesouro escondido.',
+    name: 'Treasure Map',
+    description: 'A map showing the location of hidden treasure.',
     sprite: '🗺️'
   },
   'coin-golden': {
     id: 'coin-golden',
-    name: 'Moeda Dourada',
-    description: 'Uma moeda de ouro antiga com símbolos misteriosos.',
+    name: 'Golden Coin',
+    description: 'An ancient gold coin with mysterious symbols.',
     sprite: '🪙'
   },
   'book-spells': {
     id: 'book-spells',
-    name: 'Livro de Magias',
-    description: 'Um grimório contendo magias poderosas.',
+    name: 'Spell Book',
+    description: 'A grimoire containing powerful spells.',
     sprite: '📚'
   },
   'sword-magic': {
     id: 'sword-magic',
-    name: 'Espada Mágica',
-    description: 'Uma espada encantada que brilha com luz própria.',
+    name: 'Magic Sword',
+    description: 'An enchanted sword that glows with its own light.',
     sprite: '⚔️'
   },
   'crown-ancient': {
     id: 'crown-ancient',
-    name: 'Coroa Ancestral',
-    description: 'A coroa perdida dos reis antigos.',
+    name: 'Ancient Crown',
+    description: 'The lost crown of the ancient kings.',
     sprite: '👑'
   }
 };
@@ -69,8 +69,8 @@ export const gameItems: Record<string, GameItem> = {
 export const gameLevels: GameLevel[] = [
   {
     id: 1,
-    name: 'Floresta Inicial',
-    description: 'Uma floresta mágica onde sua jornada começa.',
+    name: 'Enchanted Forest',
+    description: 'A magical forest where your journey begins.',
     background: '🌲',
     unlocked: true,
     completed: false,
@@ -81,15 +81,15 @@ export const gameLevels: GameLevel[] = [
         type: 'pickup',
         trigger: 'potion-healing',
         action: 'add-to-inventory',
-        message: 'Você encontrou uma Poção de Cura! Pode ser útil mais tarde.',
+        message: 'You found a Healing Potion! Might be useful later.',
         itemGiven: 'potion-healing'
       }
     ]
   },
   {
     id: 2,
-    name: 'Vila Abandonada',
-    description: 'Uma vila misteriosa com casas vazias.',
+    name: 'Abandoned Village',
+    description: 'A mysterious village with empty houses.',
     background: '🏘️',
     unlocked: true,
     completed: false,
@@ -100,15 +100,15 @@ export const gameLevels: GameLevel[] = [
         type: 'pickup',
         trigger: 'map-treasure',
         action: 'add-to-inventory',
-        message: 'Um mapa do tesouro! Isso pode levar a riquezas.',
+        message: 'A treasure map! This could lead to riches.',
         itemGiven: 'map-treasure'
       }
     ]
   },
   {
     id: 3,
-    name: 'Caverna Sombria',
-    description: 'Uma caverna escura cheia de mistérios.',
+    name: 'Dark Cave',
+    description: 'A dark cave full of mysteries.',
     background: '🕳️',
     unlocked: true,
     completed: false,
@@ -120,15 +120,15 @@ export const gameLevels: GameLevel[] = [
         trigger: 'healing-spot',
         condition: 'has-potion-healing',
         action: 'remove-from-inventory',
-        message: 'Você usou a poção e se sente revigorado! A passagem secreta se abriu.',
+        message: 'You used the potion and feel invigorated! The secret passage opened.',
         itemRequired: 'potion-healing'
       }
     ]
   },
   {
     id: 4,
-    name: 'Câmara do Tesouro',
-    description: 'Uma câmara antiga com um baú trancado.',
+    name: 'Treasure Chamber',
+    description: 'An ancient chamber with a locked chest.',
     background: '💰',
     unlocked: false,
     completed: false,
@@ -140,7 +140,7 @@ export const gameLevels: GameLevel[] = [
         trigger: 'treasure-chest',
         condition: 'has-key-rusty',
         action: 'give-item',
-        message: 'O baú se abriu! Dentro há uma gema azul brilhante.',
+        message: 'The chest opened! Inside is a brilliant blue gem.',
         itemRequired: 'key-rusty',
         itemGiven: 'gem-blue'
       }
@@ -148,8 +148,8 @@ export const gameLevels: GameLevel[] = [
   },
   {
     id: 5,
-    name: 'Torre do Sábio',
-    description: 'A torre de um antigo sábio.',
+    name: 'Sage\'s Tower',
+    description: 'The tower of an ancient sage.',
     background: '🗼',
     unlocked: false,
     completed: false,
@@ -160,15 +160,15 @@ export const gameLevels: GameLevel[] = [
         type: 'pickup',
         trigger: 'scroll-ancient',
         action: 'add-to-inventory',
-        message: 'Você encontrou um pergaminho antigo com runas misteriosas.',
+        message: 'You found an ancient scroll with mysterious runes.',
         itemGiven: 'scroll-ancient'
       }
     ]
   },
   {
     id: 6,
-    name: 'Biblioteca Mágica',
-    description: 'Uma biblioteca cheia de conhecimento arcano.',
+    name: 'Magic Library',
+    description: 'A library full of arcane knowledge.',
     background: '📚',
     unlocked: false,
     completed: false,
@@ -180,7 +180,7 @@ export const gameLevels: GameLevel[] = [
         trigger: 'magic-pedestal',
         condition: 'has-scroll-ancient',
         action: 'give-item',
-        message: 'O pergaminho foi traduzido! Você aprendeu sobre um cristal de poder.',
+        message: 'The scroll was translated! You learned about a power crystal.',
         itemRequired: 'scroll-ancient',
         itemGiven: 'book-spells'
       }
@@ -188,8 +188,8 @@ export const gameLevels: GameLevel[] = [
   },
   {
     id: 7,
-    name: 'Lago Cristalino',
-    description: 'Um lago mágico com águas cristalinas.',
+    name: 'Crystal Lake',
+    description: 'A magical lake with crystal clear waters.',
     background: '🏞️',
     unlocked: false,
     completed: false,
@@ -200,15 +200,15 @@ export const gameLevels: GameLevel[] = [
         type: 'pickup',
         trigger: 'key-rusty',
         action: 'add-to-inventory',
-        message: 'Você encontrou uma chave enferrujada no fundo do lago!',
+        message: 'You found a rusty key at the bottom of the lake!',
         itemGiven: 'key-rusty'
       }
     ]
   },
   {
     id: 8,
-    name: 'Templo Perdido',
-    description: 'Um templo antigo com energia mágica.',
+    name: 'Lost Temple',
+    description: 'An ancient temple with magical energy.',
     background: '🏛️',
     unlocked: false,
     completed: false,
@@ -220,7 +220,7 @@ export const gameLevels: GameLevel[] = [
         trigger: 'altar',
         condition: 'has-gem-blue',
         action: 'give-item',
-        message: 'A gema ativou o altar! Um cristal de poder emerge.',
+        message: 'The gem activated the altar! A power crystal emerges.',
         itemRequired: 'gem-blue',
         itemGiven: 'crystal-power'
       }
@@ -228,8 +228,8 @@ export const gameLevels: GameLevel[] = [
   },
   {
     id: 9,
-    name: 'Jardim Encantado',
-    description: 'Um jardim mágico com plantas luminosas.',
+    name: 'Enchanted Garden',
+    description: 'A magical garden with glowing plants.',
     background: '🌺',
     unlocked: false,
     completed: false,
@@ -240,15 +240,15 @@ export const gameLevels: GameLevel[] = [
         type: 'pickup',
         trigger: 'coin-golden',
         action: 'add-to-inventory',
-        message: 'Uma moeda dourada estava escondida entre as flores!',
+        message: 'A golden coin was hidden among the flowers!',
         itemGiven: 'coin-golden'
       }
     ]
   },
   {
     id: 10,
-    name: 'Forja Ancestral',
-    description: 'Uma forja antiga onde armas mágicas eram criadas.',
+    name: 'Ancient Forge',
+    description: 'An ancient forge where magical weapons were created.',
     background: '🔥',
     unlocked: false,
     completed: false,
@@ -260,7 +260,7 @@ export const gameLevels: GameLevel[] = [
         trigger: 'forge',
         condition: 'has-crystal-power',
         action: 'give-item',
-        message: 'Você forjou uma espada mágica usando o cristal de poder!',
+        message: 'You forged a magic sword using the power crystal!',
         itemRequired: 'crystal-power',
         itemGiven: 'sword-magic'
       }
@@ -268,8 +268,8 @@ export const gameLevels: GameLevel[] = [
   },
   {
     id: 11,
-    name: 'Ponte Quebrada',
-    description: 'Uma ponte antiga que precisa ser reparada.',
+    name: 'Broken Bridge',
+    description: 'An ancient bridge that needs to be repaired.',
     background: '🌉',
     unlocked: false,
     completed: false,
@@ -281,15 +281,15 @@ export const gameLevels: GameLevel[] = [
         trigger: 'bridge',
         condition: 'has-book-spells',
         action: 'unlock-area',
-        message: 'Você usou magia para reparar a ponte! Novas áreas se abriram.',
+        message: 'You used magic to repair the bridge! New areas have opened.',
         itemRequired: 'book-spells'
       }
     ]
   },
   {
     id: 12,
-    name: 'Montanha Sagrada',
-    description: 'Uma montanha onde os deuses antigos habitavam.',
+    name: 'Sacred Mountain',
+    description: 'A mountain where the ancient gods dwelled.',
     background: '⛰️',
     unlocked: false,
     completed: false,
@@ -298,8 +298,8 @@ export const gameLevels: GameLevel[] = [
   },
   {
     id: 13,
-    name: 'Deserto Místico',
-    description: 'Um deserto com miragens mágicas.',
+    name: 'Mystic Desert',
+    description: 'A desert with magical mirages.',
     background: '🏜️',
     unlocked: false,
     completed: false,
@@ -308,8 +308,8 @@ export const gameLevels: GameLevel[] = [
   },
   {
     id: 14,
-    name: 'Oásis Escondido',
-    description: 'Um oásis secreto no meio do deserto.',
+    name: 'Hidden Oasis',
+    description: 'A secret oasis in the middle of the desert.',
     background: '🏝️',
     unlocked: false,
     completed: false,
@@ -318,8 +318,8 @@ export const gameLevels: GameLevel[] = [
   },
   {
     id: 15,
-    name: 'Castelo Flutuante',
-    description: 'Um castelo que flutua nas nuvens.',
+    name: 'Floating Castle',
+    description: 'A castle that floats in the clouds.',
     background: '🏰',
     unlocked: false,
     completed: false,
@@ -328,8 +328,8 @@ export const gameLevels: GameLevel[] = [
   },
   {
     id: 16,
-    name: 'Laboratório Alquímico',
-    description: 'Um laboratório cheio de experimentos mágicos.',
+    name: 'Alchemical Laboratory',
+    description: 'A laboratory full of magical experiments.',
     background: '⚗️',
     unlocked: false,
     completed: false,
@@ -338,8 +338,8 @@ export const gameLevels: GameLevel[] = [
   },
   {
     id: 17,
-    name: 'Prisão das Sombras',
-    description: 'Uma prisão onde as trevas foram aprisionadas.',
+    name: 'Shadow Prison',
+    description: 'A prison where darkness was imprisoned.',
     background: '⛓️',
     unlocked: false,
     completed: false,
@@ -348,8 +348,8 @@ export const gameLevels: GameLevel[] = [
   },
   {
     id: 18,
-    name: 'Portal Dimensional',
-    description: 'Um portal que leva a outras dimensões.',
+    name: 'Dimensional Portal',
+    description: 'A portal that leads to other dimensions.',
     background: '🌀',
     unlocked: false,
     completed: false,
@@ -358,8 +358,8 @@ export const gameLevels: GameLevel[] = [
   },
   {
     id: 19,
-    name: 'Salão do Rei',
-    description: 'O grande salão onde o rei perdido governava.',
+    name: 'King\'s Hall',
+    description: 'The great hall where the lost king ruled.',
     background: '👑',
     unlocked: false,
     completed: false,
@@ -371,7 +371,7 @@ export const gameLevels: GameLevel[] = [
         trigger: 'throne',
         condition: 'has-sword-magic',
         action: 'give-item',
-        message: 'Você provou ser digno! A coroa ancestral é sua.',
+        message: 'You proved yourself worthy! The ancient crown is yours.',
         itemRequired: 'sword-magic',
         itemGiven: 'crown-ancient'
       }
@@ -379,8 +379,8 @@ export const gameLevels: GameLevel[] = [
   },
   {
     id: 20,
-    name: 'Santuário Final',
-    description: 'O santuário final onde sua jornada se completa.',
+    name: 'Final Sanctuary',
+    description: 'The final sanctuary where your journey is completed.',
     background: '✨',
     unlocked: false,
     completed: false,
@@ -392,7 +392,7 @@ export const gameLevels: GameLevel[] = [
         trigger: 'final-altar',
         condition: 'has-crown-ancient',
         action: 'complete-game',
-        message: 'Parabéns! Você completou sua jornada épica!',
+        message: 'Congratulations! You have completed your epic journey!',
         itemRequired: 'crown-ancient'
       }
     ]

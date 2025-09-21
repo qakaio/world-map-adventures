@@ -18,9 +18,9 @@ export const GameLevel = ({ levelId, onBackToMap }: GameLevelProps) => {
     return (
       <div className="min-h-screen bg-gradient-map flex items-center justify-center">
         <div className="game-panel text-center">
-          <h2 className="text-2xl font-pixel text-game-danger mb-4">Fase não encontrada!</h2>
+          <h2 className="text-2xl font-pixel text-game-danger mb-4">Level not found!</h2>
           <button onClick={onBackToMap} className="game-button">
-            Voltar ao Mapa
+            Back to Map
           </button>
         </div>
       </div>
@@ -63,7 +63,7 @@ export const GameLevel = ({ levelId, onBackToMap }: GameLevelProps) => {
     if (useEvent) {
       // Check if player has required item
       if (useEvent.itemRequired && !hasItem(useEvent.itemRequired)) {
-        addMessage('Você não tem o item necessário.', 'warning');
+        addMessage('You don\'t have the required item.', 'warning');
         return;
       }
 
@@ -93,11 +93,11 @@ export const GameLevel = ({ levelId, onBackToMap }: GameLevelProps) => {
 
       if (useEvent.action === 'complete-game') {
         completeLevel(levelId);
-        addMessage('🎉 Você completou o jogo! Parabéns, aventureiro!', 'success');
+        addMessage('🎉 You completed the game! Congratulations, adventurer!', 'success');
       }
 
     } else {
-      addMessage('Isso não funciona aqui.', 'warning');
+      addMessage('That doesn\'t work here.', 'warning');
     }
   };
 
@@ -122,7 +122,7 @@ export const GameLevel = ({ levelId, onBackToMap }: GameLevelProps) => {
             onClick={onBackToMap}
             className="game-button text-sm"
           >
-            ← Voltar ao Mapa
+            ← Back to Map
           </button>
           <div className="text-center">
             <h1 className="text-xl font-pixel text-game-primary">
@@ -174,12 +174,12 @@ export const GameLevel = ({ levelId, onBackToMap }: GameLevelProps) => {
                     <button
                       key={event.id}
                       onClick={() => handleInteractableClick(event.id)}
-                      className="game-item text-center p-4 hover:scale-105"
-                      title="Clique para interagir"
-                    >
-                      <div className="text-2xl mb-2">
-                        {event.trigger === 'treasure-chest' && '📦'}
-                        {event.trigger === 'healing-spot' && '💊'}
+                    className="game-item text-center p-4 hover:scale-105"
+                    title="Click to interact"
+                  >
+                    <div className="text-2xl mb-2">
+                      {event.trigger === 'treasure-chest' && '📦'}
+                      {event.trigger === 'healing-spot' && '💊'}
                         {event.trigger === 'magic-pedestal' && '🔮'}
                         {event.trigger === 'altar' && '⛪'}
                         {event.trigger === 'forge' && '🔨'}
@@ -198,13 +198,13 @@ export const GameLevel = ({ levelId, onBackToMap }: GameLevelProps) => {
               {selectedInventoryItem && (
                 <div className="absolute top-4 right-4 game-panel p-2">
                   <p className="text-xs font-pixel text-game-primary">
-                    Usando: {gameState.inventory.find(i => i.id === selectedInventoryItem)?.name}
+                    Using: {gameState.inventory.find(i => i.id === selectedInventoryItem)?.name}
                   </p>
                   <button 
                     onClick={() => setSelectedInventoryItem(null)}
                     className="text-xs text-game-danger hover:text-game-text"
                   >
-                    Cancelar
+                    Cancel
                   </button>
                 </div>
               )}

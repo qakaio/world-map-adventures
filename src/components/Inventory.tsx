@@ -20,10 +20,10 @@ export const Inventory = ({ selectedItem, onItemSelect }: InventoryProps) => {
     <div className="h-full">
       <div className="mb-6">
         <h2 className="text-xl font-pixel text-game-primary mb-2 flex items-center gap-2">
-          🎒 Inventário
+          🎒 Inventory
         </h2>
         <p className="text-xs text-game-text-muted">
-          Clique nos itens para usá-los
+          Click on items to use them
         </p>
       </div>
 
@@ -31,10 +31,10 @@ export const Inventory = ({ selectedItem, onItemSelect }: InventoryProps) => {
         <div className="game-panel text-center py-8">
           <div className="text-4xl mb-4 opacity-50">📦</div>
           <p className="text-sm font-pixel text-game-text-muted">
-            Inventário vazio
+            Empty inventory
           </p>
           <p className="text-xs text-game-text-dim mt-2">
-            Explore as fases para encontrar itens!
+            Explore levels to find items!
           </p>
         </div>
       ) : (
@@ -69,7 +69,7 @@ export const Inventory = ({ selectedItem, onItemSelect }: InventoryProps) => {
               {selectedItem === item.id && (
                 <div className="mt-2 pt-2 border-t border-game-border">
                   <p className="text-xs font-pixel text-game-primary animate-pulse-custom">
-                    ✨ Item selecionado
+                    ✨ Item selected
                   </p>
                 </div>
               )}
@@ -82,7 +82,7 @@ export const Inventory = ({ selectedItem, onItemSelect }: InventoryProps) => {
       <div className="mt-6 game-panel p-3">
         <div className="text-center">
           <p className="text-sm font-pixel text-game-text-muted">
-            {gameState.inventory.length} / 20 itens
+            {gameState.inventory.length} / 20 items
           </p>
           <div className="w-full bg-game-border rounded-full h-2 mt-2">
             <div 
@@ -95,12 +95,12 @@ export const Inventory = ({ selectedItem, onItemSelect }: InventoryProps) => {
 
       {/* Quick Tips */}
       <div className="mt-6 game-panel p-3">
-        <h3 className="text-sm font-pixel text-game-accent mb-2">💡 Dicas</h3>
+        <h3 className="text-sm font-pixel text-game-accent mb-2">💡 Tips</h3>
         <ul className="text-xs text-game-text-muted space-y-1">
-          <li>• Combine itens com objetos nas fases</li>
-          <li>• Alguns itens abrem novas áreas</li>
-          <li>• Examine tudo cuidadosamente</li>
-          <li>• Volte a fases anteriores com novos itens</li>
+          <li>• Combine items with level objects</li>
+          <li>• Some items unlock new areas</li>
+          <li>• Examine everything carefully</li>
+          <li>• Return to previous levels with new items</li>
         </ul>
       </div>
     </div>

@@ -34,10 +34,10 @@ export const GameMap = ({ onLevelSelect }: GameMapProps) => {
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-8 animate-fade-in">
           <h1 className="text-4xl font-pixel text-game-primary mb-4">
-            🗺️ Mapa da Aventura
+            🗺️ Adventure Map
           </h1>
           <p className="text-game-text-muted">
-            Selecione uma fase para começar sua jornada épica!
+            Select a level to begin your epic journey!
           </p>
         </div>
 
@@ -63,7 +63,7 @@ export const GameMap = ({ onLevelSelect }: GameMapProps) => {
                           ${status === 'unlocked' && !level?.completed ? 'current' : ''}
                           ${status === 'locked' ? 'opacity-40 cursor-not-allowed' : ''}
                         `}
-                        title={level?.name || `Fase ${levelId}`}
+                        title={level?.name || `Level ${levelId}`}
                       >
                         <span className="text-2xl">{level?.background || '❓'}</span>
                         <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-game-surface border border-game-border flex items-center justify-center text-xs font-pixel">
@@ -78,7 +78,7 @@ export const GameMap = ({ onLevelSelect }: GameMapProps) => {
                       
                       <div className="text-center">
                         <p className="text-xs font-pixel text-game-text-muted max-w-20 leading-tight">
-                          {level?.name || `Fase ${levelId}`}
+                          {level?.name || `Level ${levelId}`}
                         </p>
                       </div>
                     </div>
@@ -92,15 +92,15 @@ export const GameMap = ({ onLevelSelect }: GameMapProps) => {
             <div className="flex justify-center gap-6 text-xs font-pixel text-game-text-muted">
               <div className="flex items-center gap-2">
                 <div className="w-4 h-4 rounded-full bg-game-surface border border-game-border"></div>
-                <span>Bloqueada</span>
+                <span>Locked</span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-4 h-4 rounded-full game-level current"></div>
-                <span>Disponível</span>
+                <span>Available</span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-4 h-4 rounded-full game-level completed"></div>
-                <span>Completa</span>
+                <span>Complete</span>
               </div>
             </div>
           </div>
@@ -109,8 +109,8 @@ export const GameMap = ({ onLevelSelect }: GameMapProps) => {
         <div className="text-center mt-8">
           <div className="game-panel inline-block">
             <div className="text-sm font-pixel text-game-text-muted">
-              <p>💡 Dica: Explore cada fase completamente!</p>
-              <p>Itens encontrados podem ser usados em outras fases.</p>
+              <p>💡 Tip: Explore each level completely!</p>
+              <p>Items found can be used in other levels.</p>
             </div>
           </div>
         </div>

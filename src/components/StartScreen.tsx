@@ -1,6 +1,10 @@
 import { useGameState } from '@/hooks/useGameState';
 
-export const StartScreen = () => {
+interface StartScreenProps {
+  onStartGame: () => void;
+}
+
+export const StartScreen = ({ onStartGame }: StartScreenProps) => {
   const { startGame, gameState, resetGame } = useGameState();
 
   return (
@@ -12,11 +16,11 @@ export const StartScreen = () => {
             Adventure Quest
           </h1>
           <p className="text-lg font-pixel text-game-text-muted mb-2">
-            Um jogo point &amp; click épico
+            An Epic Point &amp; Click Adventure
           </p>
           <p className="text-sm text-game-text-dim max-w-md mx-auto leading-relaxed">
-            Explore 20 fases místicas, colete itens mágicos e resolva puzzles interconectados 
-            nesta jornada épica cheia de mistérios e aventuras!
+            Explore 20 mystical levels, collect magical items and solve interconnected puzzles 
+            in this epic journey full of mysteries and adventures!
           </p>
         </div>
 
@@ -24,12 +28,11 @@ export const StartScreen = () => {
           <button 
             onClick={() => {
               startGame();
-              // Auto start the game view
-              setTimeout(() => window.dispatchEvent(new CustomEvent('start-game')), 100);
+              onStartGame();
             }}
             className="game-button text-lg px-8 py-3 inline-block"
           >
-            {gameState.inventory.length > 0 ? '🎮 Continuar Jogo' : '🚀 Começar Aventura'}
+            {gameState.inventory.length > 0 ? '🎮 Continue Game' : '🚀 Start Adventure'}
           </button>
           
           {gameState.inventory.length > 0 && (
@@ -38,7 +41,7 @@ export const StartScreen = () => {
                 onClick={resetGame}
                 className="text-sm text-game-text-muted hover:text-game-text transition-colors"
               >
-                🔄 Novo Jogo
+                🔄 New Game
               </button>
             </div>
           )}
@@ -46,38 +49,38 @@ export const StartScreen = () => {
 
         <div className="mt-12 max-w-2xl mx-auto">
           <div className="game-panel">
-            <h2 className="text-lg font-pixel text-game-accent mb-4">🎯 Como Jogar</h2>
+            <h2 className="text-lg font-pixel text-game-accent mb-4">🎯 How to Play</h2>
             <div className="grid md:grid-cols-2 gap-4 text-sm text-game-text-muted">
               <div>
-                <h3 className="font-pixel text-game-text mb-2">🗺️ Navegação</h3>
+                <h3 className="font-pixel text-game-text mb-2">🗺️ Navigation</h3>
                 <ul className="space-y-1 text-xs">
-                  <li>• Clique nas fases do mapa para explorá-las</li>
-                  <li>• Use "Voltar ao Mapa" para navegar</li>
-                  <li>• Fases são desbloqueadas progressivamente</li>
+                  <li>• Click on map levels to explore them</li>
+                  <li>• Use "Back to Map" to navigate</li>
+                  <li>• Levels unlock progressively</li>
                 </ul>
               </div>
               <div>
-                <h3 className="font-pixel text-game-text mb-2">🎒 Inventário</h3>
+                <h3 className="font-pixel text-game-text mb-2">🎒 Inventory</h3>
                 <ul className="space-y-1 text-xs">
-                  <li>• Colete itens clicando neles</li>
-                  <li>• Selecione itens para usá-los</li>
-                  <li>• Combine itens com objetos nas fases</li>
+                  <li>• Collect items by clicking them</li>
+                  <li>• Select items to use them</li>
+                  <li>• Combine items with level objects</li>
                 </ul>
               </div>
               <div>
                 <h3 className="font-pixel text-game-text mb-2">🧩 Puzzles</h3>
                 <ul className="space-y-1 text-xs">
-                  <li>• Itens de uma fase podem ser usados em outras</li>
-                  <li>• Explore tudo cuidadosamente</li>
-                  <li>• Volte a fases anteriores com novos itens</li>
+                  <li>• Items from one level can be used in others</li>
+                  <li>• Explore everything carefully</li>
+                  <li>• Return to previous levels with new items</li>
                 </ul>
               </div>
               <div>
-                <h3 className="font-pixel text-game-text mb-2">🏆 Progressão</h3>
+                <h3 className="font-pixel text-game-text mb-2">🏆 Progression</h3>
                 <ul className="space-y-1 text-xs">
-                  <li>• Complete puzzles para desbloquear áreas</li>
-                  <li>• Colete todos os itens especiais</li>
-                  <li>• Chegue até o Santuário Final</li>
+                  <li>• Complete puzzles to unlock areas</li>
+                  <li>• Collect all special items</li>
+                  <li>• Reach the Final Sanctuary</li>
                 </ul>
               </div>
             </div>
@@ -86,7 +89,7 @@ export const StartScreen = () => {
 
         <div className="mt-8">
           <p className="text-xs text-game-text-dim">
-            Desenvolvido com ❤️ para aventureiros corajosos
+            Developed with ❤️ for brave adventurers
           </p>
         </div>
       </div>
