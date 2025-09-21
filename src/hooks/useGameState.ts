@@ -1,77 +1,66 @@
-import { useState, useCallback } from 'react';
-import { GameState, GameItem, GameMessage, GameLevel } from '@/types/game';
+import { useState, useCallback, useEffect } from 'react';
+import { GameState, GameItem, GameMessage } from '@/types/game';
 import { initialGameData } from '@/data/gameData';
 
 export const useGameState = () => {
   const [gameState, setGameState] = useState<GameState>(() => {
-    const saved = localStorage.getItem('pointClickGameState');
-    return saved ? JSON.parse(saved) : initialGameData;
+    try {
+      const saved = localStorage.getItem('pointClickGameState');
+      return saved ? JSON.parse(saved) : initialGameData;
+    } catch {
+      return initialGameData;
+    }
   });
 
   const [messages, setMessages] = useState<GameMessage[]>([]);
 
-  const saveGame = useCallback(() => {
+  // Sempre salva no localStorage quando gameState muda
+  useEffect(() => {
     localStorage.setItem('pointClickGameState', JSON.stringify(gameState));
   }, [gameState]);
 
   const addToInventory = useCallback((item: GameItem) => {
-    setGameState(prev => {
-      const newState = {
-        ...prev,
-        inventory: [...prev.inventory, item]
-      };
-      localStorage.setItem('pointClickGameState', JSON.stringify(newState));
-      return newState;
-    });
+    setGameState(prev => ({
+      ...prev,
+      inventory: [...prev.inventory, item],
+    }));
   }, []);
 
   const removeFromInventory = useCallback((itemId: string) => {
-    setGameState(prev => {
-      const newState = {
-        ...prev,
-        inventory: prev.inventory.filter(item => item.id !== itemId)
-      };
-      localStorage.setItem('pointClickGameState', JSON.stringify(newState));
-      return newState;
-    });
+    setGameState(prev => ({
+      ...prev,
+      inventory: prev.inventory.filter(item => item.id !== itemId),
+    }));
   }, []);
 
-  const hasItem = useCallback((itemId: string) => {
-    return gameState.inventory.some(item => item.id === itemId);
-  }, [gameState.inventory]);
+  const hasItem = useCallback(
+    (itemId: string) => gameState.inventory.some(item => item.id === itemId),
+    [gameState.inventory]
+  );
 
   const setCurrentLevel = useCallback((levelId: number | null) => {
-    setGameState(prev => {
-      const newState = { ...prev, currentLevel: levelId };
-      localStorage.setItem('pointClickGameState', JSON.stringify(newState));
-      return newState;
-    });
+    setGameState(prev => ({
+      ...prev,
+      currentLevel: levelId,
+    }));
   }, []);
 
   const completeLevel = useCallback((levelId: number) => {
-    setGameState(prev => {
-      const newState = {
-        ...prev,
-        levels: prev.levels.map(level => 
-          level.id === levelId ? { ...level, completed: true } : level
-        )
-      };
-      localStorage.setItem('pointClickGameState', JSON.stringify(newState));
-      return newState;
-    });
+    setGameState(prev => ({
+      ...prev,
+      levels: prev.levels.map(level =>
+        level.id === levelId ? { ...level, completed: true } : level
+      ),
+    }));
   }, []);
 
   const unlockLevel = useCallback((levelId: number) => {
-    setGameState(prev => {
-      const newState = {
-        ...prev,
-        levels: prev.levels.map(level => 
-          level.id === levelId ? { ...level, unlocked: true } : level
-        )
-      };
-      localStorage.setItem('pointClickGameState', JSON.stringify(newState));
-      return newState;
-    });
+    setGameState(prev => ({
+      ...prev,
+      levels: prev.levels.map(level =>
+        level.id === levelId ? { ...level, unlocked: true } : level
+      ),
+    }));
   }, []);
 
   const addMessage = useCallback((text: string, type: GameMessage['type'] = 'info') => {
@@ -79,18 +68,22 @@ export const useGameState = () => {
       id: Date.now().toString(),
       text,
       type,
-      timestamp: Date.now()
+      timestamp: Date.now(),
     };
+
     setMessages(prev => [...prev, message]);
-    
-    // Auto remove message after 3 seconds
+
+    // Auto remove message depois de 3s
     setTimeout(() => {
       setMessages(prev => prev.filter(m => m.id !== message.id));
     }, 3000);
   }, []);
 
   const startGame = useCallback(() => {
-    setGameState(prev => ({ ...prev, gameStarted: true }));
+    setGameState(prev => ({
+      ...prev,
+      gameStarted: true,
+    }));
   }, []);
 
   const resetGame = useCallback(() => {
@@ -98,6 +91,10 @@ export const useGameState = () => {
     setMessages([]);
     localStorage.removeItem('pointClickGameState');
   }, []);
+
+  const saveGame = useCallback(() => {
+    localStorage.setItem('pointClickGameState', JSON.stringify(gameState));
+  }, [gameState]);
 
   return {
     gameState,
@@ -111,6 +108,6 @@ export const useGameState = () => {
     addMessage,
     startGame,
     resetGame,
-    saveGame
+    saveGame,
   };
 };
