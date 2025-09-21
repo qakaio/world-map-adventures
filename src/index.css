@@ -1,58 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;700;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Game Design System - Retro Point & Click Adventure */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
+    /* Game Color Palette */
+    --game-bg: 220 25% 12%;
+    --game-surface: 220 20% 18%;
+    --game-surface-elevated: 220 15% 22%;
+    
+    --game-primary: 45 100% 65%;
+    --game-primary-glow: 45 100% 75%;
+    --game-secondary: 210 100% 60%;
+    --game-accent: 285 100% 70%;
+    
+    --game-success: 120 60% 50%;
+    --game-warning: 35 100% 60%;
+    --game-danger: 0 70% 60%;
+    
+    --game-text: 0 0% 95%;
+    --game-text-muted: 0 0% 70%;
+    --game-text-dim: 0 0% 50%;
+    
+    /* Game Interface */
+    --game-border: 0 0% 30%;
+    --game-border-bright: 45 100% 65%;
+    --game-shadow: 0 0% 0%;
+    
+    /* Gradients */
+    --gradient-map: linear-gradient(135deg, hsl(220 25% 12%), hsl(220 30% 20%));
+    --gradient-level: linear-gradient(135deg, hsl(210 100% 60% / 0.1), hsl(285 100% 70% / 0.1));
+    --gradient-item: linear-gradient(135deg, hsl(45 100% 65%), hsl(45 100% 75%));
+    --gradient-popup: linear-gradient(135deg, hsl(220 20% 18%), hsl(220 15% 22%));
+    
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    --transition-glow: all 0.2s ease-in-out;
+    
+    /* Shadows */
+    --shadow-glow: 0 0 20px hsl(var(--game-primary) / 0.5);
+    --shadow-popup: 0 10px 30px hsl(var(--game-shadow) / 0.8);
+    --shadow-item: 0 4px 12px hsl(var(--game-shadow) / 0.4);
+    
+    /* Legacy system compatibility */
+    --background: var(--game-bg);
+    --foreground: var(--game-text);
+    --card: var(--game-surface);
+    --card-foreground: var(--game-text);
+    --popover: var(--game-surface-elevated);
+    --popover-foreground: var(--game-text);
+    --primary: var(--game-primary);
+    --primary-foreground: var(--game-bg);
+    --secondary: var(--game-surface);
+    --secondary-foreground: var(--game-text);
+    --muted: var(--game-surface);
+    --muted-foreground: var(--game-text-muted);
+    --accent: var(--game-accent);
+    --accent-foreground: var(--game-text);
+    --destructive: var(--game-danger);
+    --destructive-foreground: var(--game-text);
+    --border: var(--game-border);
+    --input: var(--game-border);
+    --ring: var(--game-primary);
     --radius: 0.5rem;
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
   .dark {
@@ -100,6 +115,146 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-pixel;
+    overflow-x: hidden;
+  }
+
+  /* Game-specific styles */
+  .font-pixel {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .font-orbitron {
+    font-family: 'Orbitron', monospace;
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Custom animations */
+  @keyframes glow {
+    0%, 100% { 
+      box-shadow: 0 0 5px hsl(var(--game-primary) / 0.5);
+    }
+    50% { 
+      box-shadow: var(--shadow-glow);
+    }
+  }
+
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-4px);
+    }
+    60% {
+      transform: translateY(-2px);
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.7;
+    }
+  }
+
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite;
+  }
+
+  .animate-bounce-custom {
+    animation: bounce 1s ease-in-out infinite;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out;
+  }
+
+  .animate-pulse-custom {
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  /* Game UI Components */
+  .game-button {
+    @apply bg-gradient-to-br from-game-primary to-game-primary-glow;
+    @apply text-game-bg font-pixel px-4 py-2 rounded;
+    @apply border-2 border-game-border-bright;
+    @apply transition-all duration-200;
+    @apply hover:scale-105 hover:shadow-glow;
+    @apply active:scale-95;
+  }
+
+  .game-panel {
+    @apply bg-gradient-to-br from-game-surface to-game-surface-elevated;
+    @apply border-2 border-game-border;
+    @apply rounded-lg p-4;
+    @apply shadow-popup;
+  }
+
+  .game-item {
+    @apply bg-gradient-to-br from-game-surface to-game-surface-elevated;
+    @apply border border-game-border;
+    @apply rounded p-2;
+    @apply transition-all duration-200;
+    @apply hover:border-game-border-bright hover:shadow-item;
+    @apply cursor-pointer;
+  }
+
+  .game-level {
+    @apply bg-gradient-to-br from-game-secondary/20 to-game-accent/20;
+    @apply border-2 border-game-border;
+    @apply rounded-full w-12 h-12;
+    @apply flex items-center justify-center;
+    @apply font-pixel text-sm text-game-text;
+    @apply transition-all duration-300;
+    @apply hover:border-game-border-bright hover:scale-110;
+    @apply cursor-pointer;
+  }
+
+  .game-level.completed {
+    @apply bg-gradient-to-br from-game-success/30 to-game-success/50;
+    @apply border-game-success;
+    @apply shadow-glow;
+  }
+
+  .game-level.current {
+    @apply animate-glow;
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--game-surface));
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--game-border));
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--game-border-bright));
   }
 }
