@@ -23,6 +23,7 @@ export const useGameState = () => {
     setGameState(prev => ({
       ...prev,
       inventory: [...prev.inventory, item],
+      pickedUpItems: [...prev.pickedUpItems, item.id],
     }));
   }, []);
 
@@ -36,6 +37,11 @@ export const useGameState = () => {
   const hasItem = useCallback(
     (itemId: string) => gameState.inventory.some(item => item.id === itemId),
     [gameState.inventory]
+  );
+
+  const isItemPickedUp = useCallback(
+    (itemId: string) => gameState.pickedUpItems.includes(itemId),
+    [gameState.pickedUpItems]
   );
 
   const setCurrentLevel = useCallback((levelId: number | null) => {
@@ -102,6 +108,7 @@ export const useGameState = () => {
     addToInventory,
     removeFromInventory,
     hasItem,
+    isItemPickedUp,
     setCurrentLevel,
     completeLevel,
     unlockLevel,

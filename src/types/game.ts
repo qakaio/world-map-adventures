@@ -35,6 +35,7 @@ export interface GameState {
   inventory: GameItem[];
   levels: GameLevel[];
   gameStarted: boolean;
+  pickedUpItems: string[]; // Track which items have been picked up
 }
 
 export interface GameMessage {

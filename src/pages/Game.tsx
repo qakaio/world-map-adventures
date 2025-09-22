@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
-import { useGameState } from '@/hooks/useGameState';
+import { GameProvider, useGame } from '@/contexts/GameContext';
 import { StartScreen } from '@/components/StartScreen';
 import { GameMap } from '@/components/GameMap';
 import { GameLevel } from '@/components/GameLevel';
 import { GameMessages } from '@/components/GameMessages';
 
-export const Game = () => {
-  const { gameState, setCurrentLevel } = useGameState();
+const GameContent = () => {
+  const { gameState, setCurrentLevel } = useGame();
   const [view, setView] = useState<'start' | 'map' | 'level'>(() => {
     // Auto-start if game was already started
     return gameState.gameStarted ? 'map' : 'start';
@@ -45,5 +45,13 @@ export const Game = () => {
         />
       )}
     </div>
+  );
+};
+
+export const Game = () => {
+  return (
+    <GameProvider>
+      <GameContent />
+    </GameProvider>
   );
 };

@@ -1,11 +1,11 @@
-import { useGameState } from '@/hooks/useGameState';
+import { useGame } from '@/contexts/GameContext';
 
 interface StartScreenProps {
   onStartGame: () => void;
 }
 
 export const StartScreen = ({ onStartGame }: StartScreenProps) => {
-  const { startGame, gameState, resetGame } = useGameState();
+  const { startGame, gameState, resetGame } = useGame();
 
   return (
     <div className="min-h-screen bg-gradient-map flex items-center justify-center p-4">

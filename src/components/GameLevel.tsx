@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useGameState } from '@/hooks/useGameState';
+import { useGame } from '@/contexts/GameContext';
 import { GameItem, GameEvent } from '@/types/game';
 import { Inventory } from './Inventory';
 
@@ -9,7 +9,7 @@ interface GameLevelProps {
 }
 
 export const GameLevel = ({ levelId, onBackToMap }: GameLevelProps) => {
-  const { gameState, addToInventory, removeFromInventory, hasItem, addMessage, completeLevel, unlockLevel } = useGameState();
+  const { gameState, addToInventory, removeFromInventory, hasItem, isItemPickedUp, addMessage, completeLevel, unlockLevel } = useGame();
   const [selectedInventoryItem, setSelectedInventoryItem] = useState<string | null>(null);
 
   const level = gameState.levels.find(l => l.id === levelId);
@@ -156,7 +156,7 @@ export const GameLevel = ({ levelId, onBackToMap }: GameLevelProps) => {
               {/* Interactive Items */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
                 {level.items
-                  .filter(item => !hasItem(item.id)) // Hide items that are already picked up
+                  .filter(item => !isItemPickedUp(item.id)) // Hide items that have been picked up
                   .map((item) => (
                   <button
                     key={item.id}

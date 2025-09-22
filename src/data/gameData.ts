@@ -403,5 +403,6 @@ export const initialGameData: GameState = {
   currentLevel: null,
   inventory: [],
   levels: gameLevels,
-  gameStarted: false
+  gameStarted: false,
+  pickedUpItems: []
 };

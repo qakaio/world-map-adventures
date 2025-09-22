@@ -1,11 +1,11 @@
-import { useGameState } from '@/hooks/useGameState';
+import { useGame } from '@/contexts/GameContext';
 
 interface GameMapProps {
   onLevelSelect: (levelId: number) => void;
 }
 
 export const GameMap = ({ onLevelSelect }: GameMapProps) => {
-  const { gameState } = useGameState();
+  const { gameState } = useGame();
 
   const mapLayout = [
     [1, 2, 3, 4, 5],

@@ -1,4 +1,4 @@
-import { useGameState } from '@/hooks/useGameState';
+import { useGame } from '@/contexts/GameContext';
 
 interface InventoryProps {
   selectedItem: string | null;
@@ -6,7 +6,7 @@ interface InventoryProps {
 }
 
 export const Inventory = ({ selectedItem, onItemSelect }: InventoryProps) => {
-  const { gameState } = useGameState();
+  const { gameState } = useGame();
 
   const handleItemClick = (itemId: string) => {
     if (selectedItem === itemId) {
