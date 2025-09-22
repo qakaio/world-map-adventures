@@ -44,15 +44,20 @@ export const GameLevel = ({ levelId, onBackToMap }: GameLevelProps) => {
     );
 
     if (pickupEvent) {
+      // Check if item is already in inventory
+      if (hasItem(item.id)) {
+        addMessage('You already have this item.', 'warning');
+        return;
+      }
+      
       addToInventory(item);
       addMessage(pickupEvent.message, 'success');
-      
-      // Remove item from level (in a real game, you'd update the level state)
-      // For now, we'll just hide picked up items
+    } else {
+      addMessage(`You can't pick up the ${item.name}.`, 'info');
     }
   };
 
-  const handleUseItem = (inventoryItemId: string, targetId: string) => {
+  const handleUseItem = async (inventoryItemId: string, targetId: string) => {
     const useEvent = level.events.find(
       event => 
         event.type === 'use' && 
@@ -73,11 +78,10 @@ export const GameLevel = ({ levelId, onBackToMap }: GameLevelProps) => {
       }
 
       if (useEvent.itemGiven) {
-        const newItem = Object.values(require('@/data/gameData').gameItems).find(
-          (item: any) => item.id === useEvent.itemGiven
-        );
+        const { gameItems } = await import('@/data/gameData');
+        const newItem = gameItems[useEvent.itemGiven];
         if (newItem) {
-          addToInventory(newItem as GameItem);
+          addToInventory(newItem);
         }
       }
 
@@ -151,7 +155,9 @@ export const GameLevel = ({ levelId, onBackToMap }: GameLevelProps) => {
 
               {/* Interactive Items */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-                {level.items.map((item) => (
+                {level.items
+                  .filter(item => !hasItem(item.id)) // Hide items that are already picked up
+                  .map((item) => (
                   <button
                     key={item.id}
                     onClick={() => handleItemClick(item)}
