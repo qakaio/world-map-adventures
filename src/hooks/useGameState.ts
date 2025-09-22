@@ -6,7 +6,15 @@ export const useGameState = () => {
   const [gameState, setGameState] = useState<GameState>(() => {
     try {
       const saved = localStorage.getItem('pointClickGameState');
-      return saved ? JSON.parse(saved) : initialGameData;
+      if (saved) {
+        const parsedData = JSON.parse(saved);
+        // Migration: ensure pickedUpItems exists
+        if (!parsedData.pickedUpItems) {
+          parsedData.pickedUpItems = [];
+        }
+        return parsedData;
+      }
+      return initialGameData;
     } catch {
       return initialGameData;
     }
@@ -23,7 +31,7 @@ export const useGameState = () => {
     setGameState(prev => ({
       ...prev,
       inventory: [...prev.inventory, item],
-      pickedUpItems: [...prev.pickedUpItems, item.id],
+      pickedUpItems: [...(prev.pickedUpItems || []), item.id],
     }));
   }, []);
 
@@ -40,7 +48,7 @@ export const useGameState = () => {
   );
 
   const isItemPickedUp = useCallback(
-    (itemId: string) => gameState.pickedUpItems.includes(itemId),
+    (itemId: string) => gameState.pickedUpItems?.includes(itemId) || false,
     [gameState.pickedUpItems]
   );
 
