@@ -101,7 +101,16 @@ export const GameLevel = ({ levelId, onBackToMap }: GameLevelProps) => {
       }
 
     } else {
-      addMessage('That doesn\'t work here.', 'warning');
+      // Check if there's a use event for this target (without item requirement)
+      const generalUseEvent = level.events.find(
+        event => event.type === 'use' && event.trigger === targetId
+      );
+      
+      if (generalUseEvent) {
+        addMessage('You need the right item to interact with this.', 'warning');
+      } else {
+        addMessage('That doesn\'t work here.', 'warning');
+      }
     }
   };
 
@@ -180,12 +189,12 @@ export const GameLevel = ({ levelId, onBackToMap }: GameLevelProps) => {
                     <button
                       key={event.id}
                       onClick={() => handleInteractableClick(event.id)}
-                    className="game-item text-center p-4 hover:scale-105"
-                    title="Click to interact"
-                  >
-                    <div className="text-2xl mb-2">
-                      {event.trigger === 'treasure-chest' && '📦'}
-                      {event.trigger === 'healing-spot' && '💊'}
+                      className="game-item text-center p-4 hover:scale-105"
+                      title={`Click to interact${selectedInventoryItem ? ' with selected item' : ''}`}
+                    >
+                      <div className="text-2xl mb-2">
+                        {event.trigger === 'treasure-chest' && '📦'}
+                        {event.trigger === 'healing-spot' && '💊'}
                         {event.trigger === 'magic-pedestal' && '🔮'}
                         {event.trigger === 'altar' && '⛪'}
                         {event.trigger === 'forge' && '🔨'}
@@ -197,6 +206,11 @@ export const GameLevel = ({ levelId, onBackToMap }: GameLevelProps) => {
                       <p className="text-xs font-pixel text-game-text-muted">
                         {event.trigger.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())}
                       </p>
+                      {selectedInventoryItem && event.itemRequired && (
+                        <p className="text-xs text-game-primary mt-1">
+                          Requires: {gameState.inventory.find(i => i.id === event.itemRequired)?.name || event.itemRequired}
+                        </p>
+                      )}
                     </button>
                   ))}
               </div>

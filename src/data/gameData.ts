@@ -114,15 +114,14 @@ export const gameLevels: GameLevel[] = [
     completed: false,
     items: [],
     events: [
-      {
-        id: 'use-potion-cave',
-        type: 'use',
-        trigger: 'healing-spot',
-        condition: 'has-potion-healing',
-        action: 'remove-from-inventory',
-        message: 'You used the potion and feel invigorated! The secret passage opened.',
-        itemRequired: 'potion-healing'
-      }
+        {
+          id: 'use-potion-cave',
+          type: 'use',
+          trigger: 'healing-spot',
+          action: 'unlock-area',
+          message: 'You used the potion and feel invigorated! The secret passage opened.',
+          itemRequired: 'potion-healing'
+        }
     ]
   },
   {
